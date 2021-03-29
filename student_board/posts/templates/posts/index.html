@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Posts</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    {% for post in posts %}
+    <p>
+        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
+        PosterID: {{ post.poster }} <br/>
+        Date: {{ post.date }}   <br/>
+        Content: <br/>
+         {{ post }}
+    </p>
+    {% endfor %}
+    <a href="{% url 'posts:addpost' %}">Add new post</a>
+</body>
+</html>

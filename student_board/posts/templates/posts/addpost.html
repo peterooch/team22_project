@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Add post</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h5>New Post:</h5>
+    <form action="{% url 'posts:submitpost' %}" method='post'>
+    <p>
+    {% csrf_token %}
+    <label for="title">Post Title: </label>
+    <input type="text" name="title" /><br/>
+    <label for="content">Post content: <br/>
+    <textarea name="content" cols="80" rows="20">
+Post content goes here.
+    </textarea><br/>
+    <input type="submit" value="Add Post"/>
+    </p>
+    </form>
+</body>
+</html>
