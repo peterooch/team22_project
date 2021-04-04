@@ -2,16 +2,25 @@
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="{% static 'userlist.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     </head>
     <h1>User List </h1>
         <body>
-            <table style="width:100%">
+            <table class="table">
+                <thead>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th> 
+                    <th scope="col">Id</th>
+                    <th scope="col">Email<th>
+                </thead>
+                {% for user in users %}
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th> 
-                    <th>Id</th>
-                    <th>Email<th>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.Id }}</td>
+                    <td>{{ user.email }}</td>
                 </tr>
+                {% endfor %}
             </table>
         </body>
 </html>
