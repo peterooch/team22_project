@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'register.css' %}">
 </head>
 <body>
-    <form action="{% url 'register/facultyRegister:submit' %}" method="post">
+    <form action="{% url 'register:submit2' %}" method="post">
         <div class="cust_container">
         {% csrf_token %}
             <h1>Faculty Register</h1>

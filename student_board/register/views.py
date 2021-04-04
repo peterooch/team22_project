@@ -20,6 +20,8 @@ def adduser(request):
     student.save()
     return HttpResponseRedirect('/')
 
+def facultyReg(request):
+    return render(request, 'FacultyRegister.html')
 
 def facultyRegister(request):
     details = {
