@@ -1,6 +1,7 @@
 from django.db import models
+#from django.apps import apps
 
-# Create your models here.
+#User = apps.get_model('regiser', 'User')
 
 class Post(models.Model):
     poster    = models.CharField('Poster', max_length=10)

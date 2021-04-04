@@ -7,6 +7,8 @@ class User(models.Model):
     email = models.EmailField()
     password = models.TextField()
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 class Student(User):
     department = models.TextField()

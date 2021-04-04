@@ -18,4 +18,5 @@ def adduser(request):
     }
     student = Student(**kw)
     student.save()
+    request.session['user'] = student.Id
     return HttpResponseRedirect('/')

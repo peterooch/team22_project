@@ -2,8 +2,10 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.urls import reverse
+from django.apps import apps
 
-from .models import Post
+Post = apps.get_model('posts', 'Post')
+User = apps.get_model('register', 'User')
 
 def index(request):
     context = {
@@ -22,8 +24,9 @@ def addpost(request):
     return render(request, 'posts/addpost.html', {})
 
 def sumbitpost(request):
+    user = get_object_or_404(User, Id=request.session['user'])
     kw = {
-        'poster'   : '12345', # FIXME
+        'poster'   : user.Id,
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
         'date'     : timezone.now(),
