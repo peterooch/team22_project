@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.apps import apps
 
-from django.http.response import HttpResponse, HttpResponseRedirect
-
-
-# ...
-def index(request):
-    return render(request, 'admin/userlist.html')
+def userlist(request):
+    User = apps.get_model('regiser', 'User')
+    context = {
+        'users': User.objects.all()
+    }
+    return render(request, 'admin/userlist.html', context)
