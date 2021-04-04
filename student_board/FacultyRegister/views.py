@@ -18,7 +18,7 @@ from .models import Faculty
 
 def index(request):
     return render(request, 'register.html')
-
+#adding comment
 def adduser(request):
     details = {
         'first_name' : request.POST['firstname'],
