@@ -7,4 +7,5 @@ app_name = 'register'
 urlpatterns = [
     path('', views.index),
     path('submit', views.adduser, name='submit'),
+    path('facultyRegister', views.facultyRegister, name='submit'),
 ]

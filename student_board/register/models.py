@@ -12,4 +12,8 @@ class Student(User):
     department = models.TextField()
     approved = models.BooleanField(default=False)
 
+class Faculty(User):
+    courses = models.CharField(max_length=50)
+    approved = models.BooleanField(default=False)
+
     

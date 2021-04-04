@@ -33,15 +33,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'posts.apps.PostsConfig',
-    'FacultyRegister.apps.FacultyregisterConfig',
-
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'FacultyRegister.apps.FacultyregisterConfig'
 ]
 
 MIDDLEWARE = [
