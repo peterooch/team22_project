@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'posts.apps.PostsConfig',
     'admin.apps.AdminConfig',
-    'FacultyRegister.apps.FacultyregisterConfig',
 
     #'django.contrib.admin',
     'django.contrib.auth',
