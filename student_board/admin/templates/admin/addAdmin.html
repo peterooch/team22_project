@@ -1,0 +1,37 @@
+<html>
+    <h2> Add Admin </h2>
+    <br>
+    <div> Please enter the new admin's information:</div>
+    <br>
+    
+    <form action="" method="post">
+         {% csrf_token %}
+        <label for="id">ID: </label>
+        <input id="id" type="text" name="id">
+        <br><br>
+
+        <label for="first_name">First Name: </label>
+        <input id="first_name" type="text" name="first_name">
+        <br> <br>
+
+        <label for="last_name">Last Name: </label>
+        <input id="last_name" type="text" name="last_name">
+        <br><br>
+
+        <label for="email">Email: </label>
+        <input id="email" type="text" name="email">
+        <br><br>
+
+        <label for="password">Password: </label>
+        <input id="password" type="password" name="password">
+        <br>
+        <br>
+
+        <input type="submit" value="Add admin">
+
+
+    {% for message in messages %}
+        <p id="messages"> {{message}} </p>
+    {% endfor %}
+
+</html>
