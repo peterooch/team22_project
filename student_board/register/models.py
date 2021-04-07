@@ -4,7 +4,7 @@ class User(models.Model):
     id = models.CharField(primary_key=True, max_length=10)
     first_name =  models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.TextField()
 
     def __str__(self):

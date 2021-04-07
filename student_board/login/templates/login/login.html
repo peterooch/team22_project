@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <form action="" method="post">
+            <div class="cust_container">
+            {% csrf_token %}
+                <h1>Login</h1>
+                <label for="email">Email</label>
+                <input type="text" placeholder="Enter Email" name="email" id="email" required>
+                <br><br>
+                
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                <br><br>
+
+                <input type="submit" value="login">
+
+                {% for message in messages %}
+                    <p id="messages"> {{message}} </p>
+                {% endfor %}
+                </div>
+            </div>
+        </form>
+        </body>
+
+
+
+</html>

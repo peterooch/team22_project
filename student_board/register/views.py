@@ -11,14 +11,14 @@ def adduser(request):
     kw = {
         'first_name' : request.POST['firstname'],
         'last_name'  : request.POST['lastname'],
-        'Id'         : request.POST['ID'],
+        'id'         : request.POST['ID'],
         'email'      : request.POST['email'],
         'department' : request.POST['department'],
         'password'   : request.POST['psw']
     }
     student = Student(**kw)
     student.save()
-    request.session['user'] = student.Id
+    request.session['user'] = student.id
     return HttpResponseRedirect('/')
 
 def facultyReg(request):
@@ -28,7 +28,7 @@ def facultyRegister(request):
     details = {
         'first_name' : request.POST['firstname'],
         'last_name'  : request.POST['lastname'],
-        'Id'         : request.POST['ID'],
+        'id'         : request.POST['ID'],
         'email'      : request.POST['email'],
         'password'   : request.POST['psw'],
         'courses'    : request.POST['courses']

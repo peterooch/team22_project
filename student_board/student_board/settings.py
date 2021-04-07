@@ -28,12 +28,15 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTHENTICATION_BACKENDS = ['login.backend.EmailBackend']
+
 # Application definition
 
 INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'posts.apps.PostsConfig',
     'admin.apps.AdminConfig',
+    'login.apps.LoginConfig',
 
     #'django.contrib.admin',
     'django.contrib.auth',
