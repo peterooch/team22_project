@@ -1,17 +1,18 @@
+from django.db.models import Model
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
-from .forms import addAdminForm
-from register.models import Admin
 from django.contrib import messages
 from django.http import HttpResponse
 
+from .forms import addAdminForm
+from register.models import User, Admin, Student, Faculty
+
 def userlist(request):
-    User = apps.get_model('register', 'User')
     context = {
         'users': User.objects.all()
     }
     return render(request, 'admin/userlist.html', context)
-
 
 def addAdmin(request):
     form=addAdminForm()
@@ -34,3 +35,21 @@ def addAdmin(request):
 
     context={'form': form}
     return render(request, 'admin/addAdmin.html', context)
+
+def approvals(request):
+    context = {
+        'students': Student.objects.filter(approved=False),
+        'faculty' : Faculty.objects.filter(approved=False)
+    }
+    return render(request, 'admin/approvals.html', context)
+
+def approve(request, user_id):
+    for type in (Student, Faculty):
+        try:
+            user = type.objects.get(id=user_id)
+            user.approved = True
+            user.save()
+            break
+        except Model.DoesNotExist:
+            pass
+    return HttpResponseRedirect('/admin/approvals')
