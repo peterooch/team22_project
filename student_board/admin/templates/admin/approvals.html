@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+    <h1>Students waiting for approval</h1>
+    <table class="table">
+        <thead>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th> 
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+            <th scope="col"> </th> <!-- Approval link -->
+        </thead>
+        <tbody>
+        {% for user in students %}
+        <tr>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.department }}</td>
+            <td><a href="{% url 'admin:approve' user.id %}">Approve</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h1>Factulty members waiting for approval</h1>
+    <table class="table">
+        <thead>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th> 
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Courses</th>
+            <th scope="col"> </th> <!-- Approval link -->
+        </thead>
+        <tbody>
+        {% for user in faculty %}
+        <tr>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.courses }}</td>
+            <td><a href="{% url 'admin:approve' user.id %}">Approve</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
