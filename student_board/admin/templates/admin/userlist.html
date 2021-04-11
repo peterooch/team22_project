@@ -11,14 +11,16 @@
                     <th scope="col">Firstname</th>
                     <th scope="col">Lastname</th> 
                     <th scope="col">Id</th>
-                    <th scope="col">Email<th>
+                    <th scope="col">Email</th>
+                    <th scope="col">️ Delete user </th>
                 </thead>
                 {% for user in users %}
                 <tr>
                     <td>{{ user.first_name }}</td>
                     <td>{{ user.last_name }}</td>
-                    <td>{{ user.Id }}</td>
+                    <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
+                    <td><a href="{% url 'admin:deleteuser' user.id %}"> &#x1f5d1; </a> </td>
                 </tr>
                 {% endfor %}
             </table>
