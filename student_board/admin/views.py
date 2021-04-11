@@ -53,3 +53,13 @@ def approve(request, user_id):
         except Model.DoesNotExist:
             pass
     return HttpResponseRedirect('/admin/approvals')
+
+def deleteuser(requset, user_id):
+    for type in (Student, Faculty):
+        try:
+            user = type.objects.get(id=user_id)
+            user.delete()
+            break
+        except Model.DoesNotExist:
+            pass
+    return HttpResponseRedirect('/admin/userlist')

@@ -8,4 +8,5 @@ urlpatterns = [
     path('addAdmin', views.addAdmin, name='addAdmin'),
     path('approvals', views.approvals, name='approvals'),
     path('approve/<user_id>/', views.approve, name='approve'),
+    path('deleteuser/<user_id>/', views.deleteuser, name='deleteuser'),
 ]
