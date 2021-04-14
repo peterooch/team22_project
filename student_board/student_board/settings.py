@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'admin.apps.AdminConfig',
     'login.apps.LoginConfig',
+    'summaries.apps.SummariesConfig',
 
     #'django.contrib.admin',
     'django.contrib.auth',
