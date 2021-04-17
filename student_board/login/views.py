@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseRedirect
 from register.models import Admin
 from django.shortcuts import render
 from django.contrib import messages
@@ -23,7 +24,7 @@ def login(request):
                 Model = apps.get_model('register', model)
                 if Model.object.filter(id=user.id).exists():
                     request.session['user_type'] = model
-                    return HttpResponse('/')
+                    return HttpResponseRedirect('/')
 
             
         else:
