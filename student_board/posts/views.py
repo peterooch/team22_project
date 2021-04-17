@@ -24,9 +24,9 @@ def addpost(request):
     return render(request, 'posts/addpost.html', {})
 
 def sumbitpost(request):
-    user = get_object_or_404(User, Id=request.session['user'])
+    user = get_object_or_404(User, id=request.session['user'])
     kw = {
-        'poster'   : user.Id,
+        'poster'   : user.id,
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
         'date'     : timezone.now(),
