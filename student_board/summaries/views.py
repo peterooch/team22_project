@@ -20,7 +20,7 @@ def submitSum(request):
 
     details = {
         'location'  : settings.MEDIA_ROOT,
-        'title'     : request.POST['title'],
+        'title'     : newfile.name,
         'user'      : request.POST['id'],
         'course'    : request.POST['course'],
     }
