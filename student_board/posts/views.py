@@ -35,3 +35,11 @@ def sumbitpost(request):
     post = Post(**kw)
     post.save()
     return HttpResponseRedirect(reverse('posts:viewpost', args=(post.id,)))
+
+def searchmilga(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='milga')
+    }
+    return render(request, 'posts/scholarship.html', context)
+    
+
