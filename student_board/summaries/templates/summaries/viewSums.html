@@ -1,0 +1,45 @@
+{% load static %}
+<html>
+    <head>
+
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    </head>
+    <h1>Summaries </h1>
+        <body>
+            <br>
+            <form action="{% url 'summaries:filterSums' %}" method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="course">Choose a course:</label>
+                <select name="course" id="course">
+                    <option value="all"> all</option>
+                    {% for c in courses %}
+                    <option value="{{c}}">{{c}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" value="filter">
+              </form>
+            <br>
+            <table class="table">
+                <thead>
+                    <th scope="col">Course</th>
+                    <th scope="col">Uploader</th>
+                    <th scope="col">File</th> 
+                </thead>
+                {% for doc in docs %}
+                <tr>
+                    <td>{{ doc.course }}</td>
+                    <td>
+                        {% for u in users %}
+                            {% if u.id == doc.user %}
+                                {{u.first_name}} {{u.last_name}}
+                            {% endif %}
+    
+                        {% endfor %}
+                    </td>
+                    <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
+                </tr>
+                {% endfor %}
+            </table>
+        </body>
+</html>
