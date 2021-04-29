@@ -6,5 +6,6 @@ CREATE USER student_board_user with PASSWORD 'student_board';
 ALTER ROLE student_board_user SET client_encoding TO 'utf8';
 ALTER ROLE student_board_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE student_board_user SET timezone TO 'UTC';
+ALTER USER student_board_user CREATEDB;
 
 GRANT ALL PRIVILEGES ON DATABASE student_board TO student_board_user;
