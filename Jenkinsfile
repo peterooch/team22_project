@@ -8,6 +8,7 @@ pipeline {
                     source env/bin/activate
                     pip install -r requirements-test.txt
                     cd student_board
+                    rm django.sqlite3
                     python3 manage.py migrate --settings=student_board.test_settings
                     python3 manage.py test --settings=student_board.test_settings
                 '''
