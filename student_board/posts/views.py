@@ -42,4 +42,3 @@ def searchmilga(request):
     }
     return render(request, 'posts/scholarship.html', context)
     
-
