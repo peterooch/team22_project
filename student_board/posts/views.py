@@ -41,4 +41,9 @@ def searchmilga(request):
         'posts' : Post.objects.all().filter(forum_id='milga')
     }
     return render(request, 'posts/scholarship.html', context)
-    
+
+def searchJobs(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='Jobs')
+    }
+    return render(request, 'posts/jobs.html', context)

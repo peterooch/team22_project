@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <title>Posts</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <br>
+    <h3> Jobs Forum</h3>
+    <br><br>
+    {% for post in posts %}
+    <p>
+        <b>Title:</b> {{ post.title }} <br/>
+        <b>Content:</b> <br/>
+         {{ post }} <br/>
+        <b>Posted by:</b> {{ post.poster }} <br/>
+        <b>Posting date:</b> {{ post.date }}   <br/>
+        <br>
+    </p>
+    {% endfor %}
+    <a href="{% url 'posts:addpost' %}">Add new post</a>
+</body>
+</html>

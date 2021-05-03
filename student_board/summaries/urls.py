@@ -11,7 +11,5 @@ urlpatterns = [
     path('submit', views.submitSum, name='submitSum'),
     path('view', views.viewSums, name='viewSums'),
     path('filterView', views.filterSums, name='filterSums'),
-    #path('downloadFile/<title>', views.downloadFile, name='downloadFile'),
-    #path('<str:file_path>/', views.downloadFile, name='downloadFile'),
 
 ] 
