@@ -11,5 +11,8 @@ urlpatterns = [
     path('scholarship',views.searchmilga, name='searchmilga'),
     path('jobs',views.searchJobs, name='searchJobs'),
     path('scholarshipdate',views.milgabydate, name='milgabydate'),
-    path('scholarshipword',views.milgabyword, name='milgabyword')
+    path('scholarshipword',views.milgabyword, name='milgabyword'),
+    path('project',views.searchproject, name='searchproject'),
+    path('projectdate',views.projectbydate, name='projectbydate'),
+    path('projectword',views.projectbyword, name='projectbyword')
 ]

@@ -59,7 +59,6 @@ def milgabyword(request):
     }
     return render(request, 'posts/scholarship.html', context)
     
-#### end scholarship funtions ####
 
 #### job searching functions ####
 
@@ -69,4 +68,31 @@ def searchJobs(request):
     }
     return render(request, 'posts/jobs.html', context)
 
-#### end job searching functions ####
+
+##### project functions ####
+
+def searchproject(request):
+    # filter for project forum
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='project')
+    }
+
+    return render(request, 'posts/projects.html', context)
+
+def projectbydate(request):
+    #filter withing project forum to start from specific date
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='project').filter(date__gte=request.POST['fday'])
+    }
+
+    return render(request, 'posts/projects.html', context)
+
+def projectbyword(request):
+    #search withing project content with a keyword
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='project').filter(content__contains=request.POST['kword'])
+    }
+
+    return render(request, 'posts/projects.html', context)
+    
+#### end project funtions ####
