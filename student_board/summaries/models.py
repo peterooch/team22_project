@@ -1,5 +1,6 @@
 from django.db import models
-
+import os
+from student_board import settings
 # Create your models here.
 
 class Documents(models.Model):
@@ -7,3 +8,7 @@ class Documents(models.Model):
     user = models.CharField(max_length=10)
     title = models.TextField()
     course = models.TextField()
+
+    @property
+    def relative_path(self):
+        return os.path.relpath(self.location, settings.MEDIA_ROOT)

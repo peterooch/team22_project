@@ -60,3 +60,13 @@ def milgabyword(request):
     return render(request, 'posts/scholarship.html', context)
     
 #### end scholarship funtions ####
+
+#### job searching functions ####
+
+def searchJobs(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='Jobs')
+    }
+    return render(request, 'posts/jobs.html', context)
+
+#### end job searching functions ####

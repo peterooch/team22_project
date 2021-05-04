@@ -33,7 +33,7 @@ AUTHENTICATION_BACKENDS = ['login.backend.EmailBackend']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'summaries\data')
 
-#MEDIA_URL = '/summaries/data'
+MEDIA_URL = '/summaries/data/'
 
 # Application definition
 
@@ -76,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },

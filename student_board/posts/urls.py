@@ -9,6 +9,7 @@ urlpatterns = [
     path('add', views.addpost, name='addpost'),
     path('submit', views.sumbitpost, name='submitpost'),
     path('scholarship',views.searchmilga, name='searchmilga'),
+    path('jobs',views.searchJobs, name='searchJobs'),
     path('scholarshipdate',views.milgabydate, name='milgabydate'),
     path('scholarshipword',views.milgabyword, name='milgabyword')
 ]
