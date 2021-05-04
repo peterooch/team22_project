@@ -25,20 +25,38 @@ def addpost(request):
 
 def sumbitpost(request):
     user = get_object_or_404(User, id=request.session['user'])
+    forum = 'Genral'
+    if (request.POST['forum_id'] != ''):
+        forum = request.POST['forum_id']
     kw = {
         'poster'   : user.id,
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
         'date'     : timezone.now(),
-        'forum_id' : 'General', # ALSO FIXME
+        'forum_id' : forum # ALSO FIXME #good enough?
     }
     post = Post(**kw)
     post.save()
     return HttpResponseRedirect(reverse('posts:viewpost', args=(post.id,)))
+
+##### scholarship functions ####
 
 def searchmilga(request):
     context = {
         'posts' : Post.objects.all().filter(forum_id='milga')
     }
     return render(request, 'posts/scholarship.html', context)
+
+def milgabydate(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='milga').filter(date__gte=request.POST['fday'])
+    }
+    return render(request, 'posts/scholarship.html', context)
+
+def milgabyword(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='milga').filter(content__contains=request.POST['kword'])
+    }
+    return render(request, 'posts/scholarship.html', context)
     
+#### end scholarship funtions ####

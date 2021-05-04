@@ -6,15 +6,41 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
+    <br/>
+    <form action="{% url 'posts:milgabydate' %}" method='post'> {% csrf_token %}
+        <table>
+        <tr>
+            <td>
+            <label> Filter by date, from date:
+            </td>
+            <td>
+                <input type="date" name="fday">
+            </td>
+            </label>
+        </th>
+        <th>
+        <input type="submit" value="Search by date"/>
+        </td></tr>
+        </table>
+    </form>
+    <br/>
+    <form action="{% url 'posts:milgabyword' %}" method='post'> {% csrf_token %}
+        <label> Filter by a key word:
+            <input type="text" name="kword">
+        </label>
+        <input type="submit" value="Search by a keyword"/>
+    </form>
     {% for post in posts %}
     <p>
-        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
-        Content: <br/>
-         {{ post }} <br/>
-        Posted by: {{ post.poster }} <br/>
-        Posting date: {{ post.date }}   <br/>
+        <b>Title:</b> <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
+        <b>Content:</b> <br/>
+         {{ post.content }} <br/>
+        <b>Posted by:</b> {{ post.poster }} <br/>
+        <b>Posting date:</b> {{ post.date }}   <br/>
+        <br/>
     </p>
     {% endfor %}
+    <br/>
     <a href="{% url 'posts:addpost' %}">Add new post</a>
 </body>
 </html>
