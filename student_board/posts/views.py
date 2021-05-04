@@ -95,4 +95,28 @@ def projectbyword(request):
 
     return render(request, 'posts/projects.html', context)
     
-#### end project funtions ####
+#### study-partners funtions ####
+
+def studybuddy(request):
+
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='study')
+    }
+
+    return render(request, 'posts/study.html', context)
+
+def studydate(request):
+    
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='study').filter(date__gte=request.POST['fday'])
+    }
+
+    return render(request, 'posts/study.html', context)
+
+def studyword(request):
+    
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='study').filter(content__contains=request.POST['kword'])
+    }
+
+    return render(request, 'posts/study.html', context)
