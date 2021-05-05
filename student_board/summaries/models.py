@@ -8,6 +8,7 @@ class Documents(models.Model):
     user = models.CharField(max_length=10)
     title = models.TextField()
     course = models.TextField()
+    file_size = models.TextField()
 
     @property
     def relative_path(self):
