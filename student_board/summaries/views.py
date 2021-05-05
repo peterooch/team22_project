@@ -16,12 +16,14 @@ def submitSum(request):
     newfile = request.FILES['file']
     fs = FileSystemStorage()
     fs.save(newfile.name, newfile)
+    file_size = fs.size(newfile.name)
 
     details = {
         'location'  : settings.MEDIA_ROOT,
         'title'     : newfile.name,
         'user'      : request.POST['id'],
         'course'    : request.POST['course'],
+        'file_size' : file_size,
     }
     doc = Documents(**details)
     doc.save()
@@ -33,7 +35,7 @@ def viewSums(request):
     context = {
         'users': User.objects.all(),
         'courses': Documents.objects.values_list('course', flat=True).distinct(),
-        'docs': Documents.objects.all()
+        'docs': Documents.objects.all(),
     }
     return render(request, 'summaries/viewSums.html', context)
 

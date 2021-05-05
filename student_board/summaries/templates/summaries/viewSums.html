@@ -25,6 +25,7 @@
                     <th scope="col">Course</th>
                     <th scope="col">Uploader</th>
                     <th scope="col">File</th> 
+                    <th scope="col"> File size </th>
                 </thead>
                 {% for doc in docs %}
                 <tr>
@@ -38,6 +39,7 @@
                         {% endfor %}
                     </td>
                     <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
+                    <td> {{ doc.file_size }} bytes </td>
                 </tr>
                 {% endfor %}
             </table>
