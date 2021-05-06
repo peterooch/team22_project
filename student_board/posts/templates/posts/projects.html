@@ -7,7 +7,7 @@
 </head>
 <body>
     <br/>
-    <form action="{% url 'posts:milgabydate' %}" method='post'> {% csrf_token %}
+    <form action="{% url 'posts:projectbydate' %}" method='post'> {% csrf_token %}
         <table>
         <tr>
             <td>
@@ -24,11 +24,11 @@
         </table>
     </form>
     <br/>
-    <form action="{% url 'posts:milgabyword' %}" method='post'> {% csrf_token %}
+    <form action="{% url 'posts:projectbyword' %}" method='post'> {% csrf_token %}
         <label> Filter by a key word:
             <input type="text" name="kword">
         </label>
-        <input type="submit" value="Search by a keyword"/>
+        <input type="submit" value="Search keyword"/>
     </form>
     {% for post in posts %}
     <p>

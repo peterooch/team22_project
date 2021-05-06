@@ -10,4 +10,12 @@ urlpatterns = [
     path('submit', views.sumbitpost, name='submitpost'),
     path('scholarship',views.searchmilga, name='searchmilga'),
     path('jobs',views.searchJobs, name='searchJobs'),
+    path('scholarshipdate',views.milgabydate, name='milgabydate'),
+    path('scholarshipword',views.milgabyword, name='milgabyword'),
+    path('project',views.searchproject, name='searchproject'),
+    path('projectdate',views.projectbydate, name='projectbydate'),
+    path('projectword',views.projectbyword, name='projectbyword'),
+    path('study',views.studybuddy, name='studybuddy'),
+    path('studydate',views.studydate, name='studydate'),
+    path('studyword',views.studyword, name='studyword')
 ]

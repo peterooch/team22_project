@@ -25,16 +25,22 @@ def addpost(request):
 
 def sumbitpost(request):
     user = get_object_or_404(User, id=request.session['user'])
+    forum = 'Genral'
+    if (request.POST['forum_id'] != ''):
+        forum = request.POST['forum_id']
     kw = {
         'poster'   : user.id,
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
         'date'     : timezone.now(),
         'forum_id' : 'General', # ALSO FIXME
+        'forum_id' : forum # ALSO FIXME #good enough?
     }
     post = Post(**kw)
     post.save()
     return HttpResponseRedirect(reverse('posts:viewpost', args=(post.id,)))
+
+##### scholarship functions ####
 
 def searchmilga(request):
     context = {
@@ -42,7 +48,23 @@ def searchmilga(request):
     }
     return render(request, 'posts/scholarship.html', context)
 
+def milgabydate(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='milga').filter(date__gte=request.POST['fday'])
+    }
+    return render(request, 'posts/scholarship.html', context)
+
+def milgabyword(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='milga').filter(content__contains=request.POST['kword'])
+    }
+    return render(request, 'posts/scholarship.html', context)
+    
+
+#### job searching functions ####
+
 def searchJobs(request):
+<<<<<<< HEAD
     if request.method == 'POST':
         word = request.POST['search']
         date = request.POST['date']
@@ -56,3 +78,62 @@ def searchJobs(request):
             'date'     : timezone.now()
         }
     return render(request, 'posts/jobs.html', context)
+=======
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='Jobs')
+    }
+    return render(request, 'posts/jobs.html', context)
+
+
+##### project functions ####
+
+def searchproject(request):
+    # filter for project forum
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='project')
+    }
+
+    return render(request, 'posts/projects.html', context)
+
+def projectbydate(request):
+    #filter withing project forum to start from specific date
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='project').filter(date__gte=request.POST['fday'])
+    }
+
+    return render(request, 'posts/projects.html', context)
+
+def projectbyword(request):
+    #search withing project content with a keyword
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='project').filter(content__contains=request.POST['kword'])
+    }
+
+    return render(request, 'posts/projects.html', context)
+    
+#### study-partners funtions ####
+
+def studybuddy(request):
+
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='study')
+    }
+
+    return render(request, 'posts/study.html', context)
+
+def studydate(request):
+    
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='study').filter(date__gte=request.POST['fday'])
+    }
+
+    return render(request, 'posts/study.html', context)
+
+def studyword(request):
+    
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='study').filter(content__contains=request.POST['kword'])
+    }
+
+    return render(request, 'posts/study.html', context)
+>>>>>>> BSPM2021T22-6
