@@ -33,7 +33,6 @@ def sumbitpost(request):
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
         'date'     : timezone.now(),
-        'forum_id' : 'General', # ALSO FIXME
         'forum_id' : forum # ALSO FIXME #good enough?
     }
     post = Post(**kw)
