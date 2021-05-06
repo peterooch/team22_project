@@ -63,7 +63,6 @@ def milgabyword(request):
 #### job searching functions ####
 
 def searchJobs(request):
-<<<<<<< HEAD
     if request.method == 'POST':
         word = request.POST['search']
         date = request.POST['date']
@@ -76,11 +75,6 @@ def searchJobs(request):
             'posts' : Post.objects.all().filter(forum_id='Jobs'),
             'date'     : timezone.now()
         }
-    return render(request, 'posts/jobs.html', context)
-=======
-    context = {
-        'posts' : Post.objects.all().filter(forum_id='Jobs')
-    }
     return render(request, 'posts/jobs.html', context)
 
 
@@ -135,4 +129,3 @@ def studyword(request):
     }
 
     return render(request, 'posts/study.html', context)
->>>>>>> BSPM2021T22-6
