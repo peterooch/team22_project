@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'userlist.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    </head>
+    <h1>Student List</h1>
+        <body>
+            <table class="table">
+                <thead>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th> 
+                    <th scope="col">Id</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">️ </th>
+                </thead>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.email }}</td>
+                    <td><a href="{% url 'admin:convert' student.id %}">Make faculty member</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </body>
+</html>
