@@ -7,7 +7,11 @@
     <h2>Add a new summary</h2>
     <form action="{% url 'summaries:submitSum' %}" method='post' enctype="multipart/form-data">
         {% csrf_token %}
+        {% if faculty %}
+        <label for="id">Enter faculty ID: </label>
+        {% else %}
         <label for="id">Enter student ID: </label>
+        {% endif %}
         <input id="id" type="text" name="id">
         <br><br>
         <label for="course">Enter course: </label>
