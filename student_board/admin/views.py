@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.apps import apps
 from django.contrib import messages
 from django.http import HttpResponse
-
 from .forms import addAdminForm
 from register.models import User, Admin, Student, Faculty
 
@@ -63,3 +62,29 @@ def deleteuser(requset, user_id):
         except Model.DoesNotExist:
             pass
     return HttpResponseRedirect('/admin/userlist')
+
+def student_to_faculty(request, user_id = None):
+    ctx = { 'students': Student.objects.all() }
+
+    if user_id is None:
+        return render(request, 'admin/student_to_faculty.html', ctx)
+
+    student = None
+    try:
+        student = Student.objects.get(id=user_id)
+    except Model.DoesNotExist:
+        return render(request, 'admin/student_to_faculty.html', ctx)
+
+    kw = {
+        'id': student.id,
+        'first_name': student.first_name,
+        'last_name': student.last_name,
+        'email': student.email,
+        'password': student.password,
+        'approved': student.approved,
+        'courses': ''
+    }
+    student.delete()
+    faculty = Faculty(**kw)
+    faculty.save()
+    return render(request, 'admin/student_to_faculty.html', ctx)
