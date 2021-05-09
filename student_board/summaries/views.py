@@ -8,7 +8,12 @@ from django.conf import settings
 
 
 def addSum(request):
-    return render(request, 'summaries/addSummary.html')
+    context = { 'faculty': False}
+    return render(request, 'summaries/addSummary.html', context)
+
+def addSumFaculty(request):
+    context = { 'faculty': True}
+    return render(request, 'summaries/addSummary.html', context)
 
 def submitSum(request):
 
