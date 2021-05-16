@@ -22,7 +22,7 @@ def login(request):
 
             for model in model_names:
                 Model = apps.get_model('register', model)
-                if Model.object.filter(id=user.id).exists():
+                if Model.objects.filter(id=user.id).exists():
                     request.session['user_type'] = model
                     return HttpResponseRedirect('/')
 
