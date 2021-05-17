@@ -1,9 +1,25 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <meta charset='utf-8'>
     <title>Posts</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="{% static 'postsT.css' %}">
+    <style>
+    .delete_button {
+        border: none;
+        color: black;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    </style>
 </head>
 <body>
     <table style="width:30%">
@@ -20,15 +36,20 @@
     </tr>
     </table>
     <br/>
+    <table>
+    <tr>
     {% for post in posts %}
-    <p>
-        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
+        <td>
+        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a>
         Content: <br/>
-         {{ post.content }} <br/>
-        Posted by: {{ post.poster }} <br/>
-        Posting date: {{ post.date }}   <br/>
-    </p>
+        {{ post.content }} 
+        Posted by: {{ post.poster }} 
+        Posting date: {{ post.date }} 
+        <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" > delete post</a>
+        </td>
     {% endfor %}
+    </tr>
+    </table>
     <a href="{% url 'posts:addpost' %}">Add new post</a>
 </body>
 </html>
