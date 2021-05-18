@@ -1,0 +1,18 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form action="{% url 'posts:submitpost' %}" method='post'>
+            {% csrf_token %}
+            <label for="title">Post Title: </label>
+            <input type="text" name="title" /><br><br>
+            <label for="url" >Url zoom: </label>
+            <input type="text" name="content"> <br><br>
+            <label for="date" >Date: </label>
+            <input type="datetime-local" name="date"> <br><br>
+            <input type="submit">
+            <input type="hidden" name="forum_id" value="zoom">
+        </form>
+    </body>
+</html>

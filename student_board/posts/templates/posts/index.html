@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-{% load static %}
 <html>
 <head>
     <meta charset='utf-8'>
     <title>Posts</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" type="text/css" href="{% static 'postsT.css' %}">
     <style>
-    .delete_button {
-        border: none;
-        color: black;
-        padding: 16px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-    }
+        .button {
+            background-color: #555555;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        table, td, th {
+        border: 1px solid black;
+        }
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
@@ -33,23 +38,33 @@
         <th>
             <a href="{% url 'posts:studybuddy' %}">Study together posts</a>
         </th>
+        <th>
+            <a href="{% url 'posts:zoomlink' %}"> Zoom meeting </a>
+        </th>
     </tr>
     </table>
     <br/>
     <table>
-    <tr>
-    {% for post in posts %}
-        <td>
-        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a>
-        Content: <br/>
-        {{ post.content }} 
-        Posted by: {{ post.poster }} 
-        Posting date: {{ post.date }} 
-        <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" > delete post</a>
-        </td>
-    {% endfor %}
-    </tr>
+        <th>Title</th>
+        <th>content</th>
+        <th>Posted by</th>
+        <th>Posting date</th>
+        <tr>
+            {% for post in posts %}
+                <tr>
+                    <td> <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> </td>
+                    {% if 'zoom' in post.forum_id %}
+                        <td> <a href="{{ post.content }}">{{ post.content }}</a> </td>
+                    {% else %}
+                        <td> {{post.content}} </td>
+                    {% endif %}
+                    <td> {{ post.poster }}  </td>
+                    <td> {{ post.date }}   </td>
+                    <td> <a href="{% url 'posts:deletepost' post.id %}" class="button" > delete post</a> </td>
+                </tr>
+            {% endfor %}
+        </tr>
     </table>
-    <a href="{% url 'posts:addpost' %}">Add new post</a>
+    <a href="{% url 'posts:addpost' %}" class="button">Add new post</a>
 </body>
 </html>
