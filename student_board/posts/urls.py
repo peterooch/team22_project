@@ -18,5 +18,9 @@ urlpatterns = [
     path('projectword',views.projectbyword, name='projectbyword'),
     path('study',views.studybuddy, name='studybuddy'),
     path('studydate',views.studydate, name='studydate'),
-    path('studyword',views.studyword, name='studyword')
+    path('studyword',views.studyword, name='studyword'),
+    path('apartment',views.searchapartment, name='searchapartment'),
+    path('apartmentbydate',views.apartmentbydate, name='apartmentbydate'),
+    path('apartment_key_word',views.apartment_key_word, name='apartment_key_word'),
+    
 ]

@@ -134,3 +134,29 @@ def studyword(request):
     }
 
     return render(request, 'posts/study.html', context)
+
+##### apartment forum functions ####
+
+def searchapartment(request):
+    # filter for apartment forum
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='apartment')
+    }
+
+    return render(request, 'posts/apartment.html', context)
+
+def apartmentbydate(request):
+    #filter withing apartment forum to start from specific date
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='apartment').filter(date__gte=request.POST['fday'])
+    }
+
+    return render(request, 'posts/apartment.html', context)
+
+def apartment_key_word(request):
+    #search withing apartment forum with a keyword
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='apartment').filter(content__contains=request.POST['kword'])
+    }
+
+    return render(request, 'posts/apartment.html', context)
