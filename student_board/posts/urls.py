@@ -19,5 +19,6 @@ urlpatterns = [
     path('study',views.studybuddy, name='studybuddy'),
     path('studydate',views.studydate, name='studydate'),
     path('studyword',views.studyword, name='studyword'),
-    path('zoom', views.zoomlink, name='zoomlink')
+    path('zoom', views.zoomlink, name='zoomlink'),
+    path('social', views.searchSocial, name='searchSocial'),
 ]

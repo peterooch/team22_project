@@ -99,6 +99,21 @@ def searchJobs(request):
         }
     return render(request, 'posts/jobs.html', context)
 
+def searchSocial(request):
+    if request.method == 'POST':
+        word = request.POST['search']
+        date = request.POST['date']
+        context = {
+            'posts' : Post.objects.all().filter(forum_id='Social' , title__contains=word, content__contains=word, date__contains=date ),
+            'date'     : timezone.now()
+        }
+    else:
+        context = {
+            'posts' : Post.objects.all().filter(forum_id='Social'),
+            'date'     : timezone.now()
+        }
+    return render(request, 'posts/social.html', context)
+
 
 ##### project functions ####
 
