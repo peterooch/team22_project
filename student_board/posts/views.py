@@ -3,6 +3,14 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.urls import reverse
 from django.apps import apps
+from django.utils.dateparse import parse_datetime
+from django.utils.timezone import is_aware, make_aware
+
+def get_aware_datetime(date_str):
+    ret = parse_datetime(date_str)
+    if not is_aware(ret):
+        ret = make_aware(ret)
+    return ret
 
 Post = apps.get_model('posts', 'Post')
 User = apps.get_model('register', 'User')
@@ -33,15 +41,24 @@ def sumbitpost(request):
     forum = 'Genral'
     if (request.POST['forum_id'] != ''):
         forum = request.POST['forum_id']
+    if 'zoomdate' in request.POST:
+        date = request.POST['zoomdate']
+        date = get_aware_datetime(date)
+
+    else:
+        date = timezone.now()
+
     kw = {
         'poster'   : user.id,
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
-        'date'     : timezone.now(),
+        'date'     : date,
         'forum_id' : forum # ALSO FIXME #good enough?
     }
     post = Post(**kw)
     post.save()
+    if forum == 'zoom':
+        return HttpResponseRedirect(reverse('posts:index'))
     return HttpResponseRedirect(reverse('posts:viewpost', args=(post.id,)))
 
 ##### scholarship functions ####
@@ -118,6 +135,10 @@ def studybuddy(request):
     }
 
     return render(request, 'posts/study.html', context)
+
+def zoomlink(request):
+    return render(request, 'posts/zoom.html')
+
 
 def studydate(request):
     

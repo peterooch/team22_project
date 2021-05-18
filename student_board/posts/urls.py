@@ -18,5 +18,6 @@ urlpatterns = [
     path('projectword',views.projectbyword, name='projectbyword'),
     path('study',views.studybuddy, name='studybuddy'),
     path('studydate',views.studydate, name='studydate'),
-    path('studyword',views.studyword, name='studyword')
+    path('studyword',views.studyword, name='studyword'),
+    path('zoom', views.zoomlink, name='zoomlink')
 ]
