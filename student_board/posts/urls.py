@@ -23,5 +23,6 @@ urlpatterns = [
     path('apartmentbydate',views.apartmentbydate, name='apartmentbydate'),
     path('apartment_key_word',views.apartment_key_word, name='apartment_key_word'),
     path('zoom', views.zoomlink, name='zoomlink'),
+    path('social', views.searchSocial, name='searchSocial'),
     path('social', views.searchSocial, name='searchSocial')
 ]
