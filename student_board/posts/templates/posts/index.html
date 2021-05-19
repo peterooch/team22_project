@@ -51,6 +51,7 @@
     </table>
     <br/>
     {% for post in posts %}
+        <br/>
         Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
         Content: <br/>
         {{ post.content }} <br/>
