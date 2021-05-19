@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <table style="width:30%">
+    <table style="width:50%">
     <tr>
         <th>    
             <a href="{% url 'posts:searchmilga' %}">Scholarship posts</a>
@@ -39,20 +39,16 @@
     </tr>
     </table>
     <br/>
-    <table>
-    <tr>
     {% for post in posts %}
-        <td>
-        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a>
+        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
         Content: <br/>
-        {{ post.content }} 
-        Posted by: {{ post.poster }} 
-        Posting date: {{ post.date }} 
+        {{ post.content }} <br/>
+        Posted by: {{ post.poster }} <br/>
+        Posting date: {{ post.date }} <br/>
         <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" > delete post</a>
-        </td>
+        <br/>
     {% endfor %}
-    </tr>
-    </table>
+    <br/>
     <a href="{% url 'posts:addpost' %}">Add new post</a>
 </body>
 </html>
