@@ -21,4 +21,5 @@ urlpatterns = [
     path('studyword',views.studyword, name='studyword'),
     path('zoom', views.zoomlink, name='zoomlink'),
     path('social', views.searchSocial, name='searchSocial'),
+    path('social', views.searchSocial, name='searchSocial')
 ]
