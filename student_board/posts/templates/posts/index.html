@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-{% load static %}
 <html>
 <head>
     <meta charset='utf-8'>
     <title>Posts</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" type="text/css" href="{% static 'postsT.css' %}">
     <style>
-    .delete_button {
-        border: none;
-        color: black;
-        padding: 16px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-    }
+        .button {
+            background-color: #555555;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        table, td, th {
+        border: 1px solid black;
+        }
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
@@ -35,6 +40,9 @@
         </th>
         <th>
             <a href="{% url 'posts:searchapartment' %}">Apartment forum</a>
+        </th>
+        <th>
+            <a href="{% url 'posts:zoomlink' %}"> Zoom meeting </a>
         </th>
     </tr>
     </table>
