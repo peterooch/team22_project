@@ -196,3 +196,26 @@ def apartment_key_word(request):
     }
 
     return render(request, 'posts/apartment.html', context)
+
+##### private teaching forum functions ####
+
+def searchateacher(request):
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='private teaching')
+    }
+    return render(request, 'posts/privateteaching.html', context)
+
+def teachingbydate(request):
+    #filter an private teacher post from specific date
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='private teaching').filter(date__gte=request.POST['fday'])
+    }
+
+    return render(request, 'posts/privateteaching.html', context)
+
+def teaching_keyword(request):
+    #search withing private teaching forum with a keyword
+    context = {
+        'posts' : Post.objects.all().filter(forum_id='private teaching').filter(content__contains=request.POST['kword'])
+    }
+    return render(request, 'posts/privateteaching.html', context)
