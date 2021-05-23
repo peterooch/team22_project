@@ -26,6 +26,9 @@
                     <th scope="col">Uploader</th>
                     <th scope="col">File</th> 
                     <th scope="col"> File size </th>
+                    {% if admin %}
+                        <th scope="col"> Delete </th>
+                    {% endif %}
                 </thead>
                 {% for doc in docs %}
                 <tr>
@@ -40,6 +43,9 @@
                     </td>
                     <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
                     <td> {{ doc.file_size }} bytes </td>
+                    {% if admin %}
+                        <td> <a href="{% url 'summaries:deleteSum' doc.title %}" >Delete Summary</a><br/></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </table>

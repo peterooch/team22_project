@@ -12,4 +12,5 @@ urlpatterns = [
     path('facultySubmit', views.addSumFaculty, name='addSumFaculty'),
     path('view', views.viewSums, name='viewSums'),
     path('filterView', views.filterSums, name='filterSums'),
+    path('delete/<str:title>/', views.deleteSum, name='deleteSum'),
 ] 
