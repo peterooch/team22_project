@@ -17,7 +17,8 @@ User = apps.get_model('register', 'User')
 
 def index(request):
     context = {
-        'posts': Post.objects.all()
+        'posts': Post.objects.all(),
+        'user_type': request.session['user_type'],
     }
     return render(request, 'posts/index.html', context)
 
@@ -29,8 +30,9 @@ def viewpost(request, post_id):
     return render(request, 'posts/post.html', context)
 
 def deletepost(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    post.delete()
+    if request.session['user_type'] == 'Admin':
+        post = get_object_or_404(Post, id=post_id)
+        post.delete()
     return HttpResponseRedirect(reverse('posts:index'))
 
 def addpost(request):
