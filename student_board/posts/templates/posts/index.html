@@ -50,17 +50,22 @@
     </tr>
     </table>
     <br/>
+    <div style="display: flex; flex-wrap: wrap;">
     {% for post in posts %}
-        <br/>
+        <div>
         Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
+        {% if 'zoom' in post.forum_id %}
+        <a href="{{ post.content }}">{{ post.content }}</a><br/>
+        {% else %}
         Content: <br/>
         {{ post.content }} <br/>
+        {% endif %}
         Posted by: {{ post.poster }} <br/>
         Posting date: {{ post.date }} <br/>
-        <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" > delete post</a>
-        <br/>
+        <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" >Delete post</a><br/>
+        </div>
     {% endfor %}
-    <br/>
+    </div>
     <a href="{% url 'posts:addpost' %}">Add new post</a>
 </body>
 </html>
