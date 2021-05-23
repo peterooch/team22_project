@@ -38,6 +38,7 @@ MEDIA_URL = '/summaries/data/'
 # Application definition
 
 INSTALLED_APPS = [
+    'quiz.apps.QuizConfig',
     'register.apps.RegisterConfig',
     'posts.apps.PostsConfig',
     'admin.apps.AdminConfig',
