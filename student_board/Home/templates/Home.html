@@ -10,9 +10,10 @@
   <a class="home" href="#home">Home</a>
   <a href="{% url 'register:index' %}">Register</a>
   <a href="{% url 'login:login' %}">Login</a>
+{% if logged %}
   <a href="{% url 'posts:index' %}">Posts</a>
   <a href="{% url 'summaries:viewSums' %}">Summaries</a>
+{% endif %}
 </div>
-
 </body>
 </html>
