@@ -12,6 +12,8 @@ def viewquestion(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'quiz/question.html', {'question': question})
 
-def result(request, answer_id):
-    answer = get_object_or_404(Choice, pk=answer_id)
-    return render(request, 'quiz/result.html', {'answer':answer})
+def result(request, question_id):
+    context = {
+        'answer' : Choice.objects.get(pk=request.POST['choice'])
+    }
+    return render(request, 'quiz/result.html', context)
