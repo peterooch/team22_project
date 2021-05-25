@@ -13,3 +13,8 @@ class Documents(models.Model):
     @property
     def relative_path(self):
         return os.path.relpath(self.location, settings.MEDIA_ROOT)
+
+
+class Rules(models.Model):
+    course = models.TextField()
+    content = models.TextField()
