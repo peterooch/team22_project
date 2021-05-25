@@ -16,5 +16,5 @@ class Documents(models.Model):
 
 
 class Rules(models.Model):
-    course = models.TextField()
-    content = models.TextField()
+    forum  = models.CharField(default='General', max_length=20)
+    rules = models.TextField()
