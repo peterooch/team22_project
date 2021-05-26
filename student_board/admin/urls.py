@@ -11,4 +11,6 @@ urlpatterns = [
     path('deleteuser/<user_id>/', views.deleteuser, name='deleteuser'),
     path('convert/<user_id>/', views.student_to_faculty, name='convert'),
     path('convert', views.student_to_faculty),
+    path('rules', views.addRules, name='addRules'),
+    path('submitRules', views.submitRules, name='submitRules'),
 ]
