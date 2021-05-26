@@ -19,7 +19,13 @@
         <input type="date" id="date" name="date" value={{date}}> <br>
         <input type="submit" value="search">
       </form>
-    <br><br>
+    <p>
+        <br>
+        {% if rules is not None %}
+        <h5>Forum Rules:</h5> {{ rules }} <br/>
+        {% endif %}
+    </p>
+    <br>
     {% for post in posts %}
     <p>
         <b>Title:</b> {{ post.title }} <br/>

@@ -10,16 +10,24 @@
     <br>
     <h3> Jobs Forum</h3>
     <br>
-    <form action="{% url 'posts:searchJobs' %}" method='post' enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="search">Search by word: </label>
-        <input type="search" id="search" name="search"><br>
+    <p>
+        <form action="{% url 'posts:searchJobs' %}" method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="search">Search by word: </label>
+            <input type="search" id="search" name="search"><br>
 
-        <label for="start">Search by date: </label>
-        <input type="date" id="date" name="date" value={{date}}> <br>
-        <input type="submit" value="search">
-      </form>
-    <br><br>
+            <label for="start">Search by date: </label>
+            <input type="date" id="date" name="date" value={{date}}> <br>
+            <input type="submit" value="search">
+        </form>
+    </p>
+    <p>
+        <br>
+        {% if rules is not None %}
+        <h5>Forum Rules:</h5> {{ rules }} <br/>
+        {% endif %}
+    </p>
+    <br>
     {% for post in posts %}
     <p>
         <b>Title:</b> {{ post.title }} <br/>
