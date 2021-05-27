@@ -17,3 +17,9 @@ def result(request, question_id):
         'answer' : Choice.objects.get(pk=request.POST['choice'])
     }
     return render(request, 'quiz/result.html', context)
+
+def add(request):
+    return render(request, 'quiz/addquiz.html')
+
+def submit_quiz(request):
+    return HttpResponse("You've submitted your quiz")

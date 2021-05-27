@@ -1,0 +1,17 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz.css' %}">
+</head>
+<body>
+    <form action="{% url 'quiz:add' %}" method="post">
+        <div class="cust_container">
+        {% csrf_token %}
+            <h1>Add a quiz</h1>
+            <label for="question_text">Enter question text:</label>
+            <input type="text" placeholder="question text" name="question_text" id="question_text" required>            
+            <button type="submit" class="registerbtn">Add question</button>
+        </div>
+    </form>
+    </body>
+</html>
