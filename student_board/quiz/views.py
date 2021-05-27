@@ -49,6 +49,7 @@ def submit_quiz(request):
             'choice_text' : request.POST[text1],
             'correct' : correct
         }
-        choice1 = Choice(**choice)
-        choice1.save()
+        if (choice['choice_text'] != ''):
+            choice1 = Choice(**choice)
+            choice1.save()
     return HttpResponseRedirect(reverse('quiz:viewquestion', args=(question.id,)))
