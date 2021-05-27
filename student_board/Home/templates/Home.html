@@ -28,6 +28,7 @@
 {% if logged %}
   <a class="btn btn-primary" href="{% url 'posts:index' %}">Posts</a><br/><br/>
   <a class="btn btn-primary" href="{% url 'summaries:viewSums' %}">Summaries</a><br/><br/>
+  <a class="btn btn-primary" href="{% url 'quiz:index' %}">Quizzes</a><br/><br/>
   <a class="btn btn-danger" href="{% url 'Home:Logout' %}" >Logout</a><br/><br/>
   {% if user == "Admin" %}
     Admin Actions:<br/>

@@ -62,7 +62,7 @@ def sumbitpost(request):
         date = timezone.now()
 
     kw = {
-        'poster'   : user.id,
+        'poster'   : user.first_name,
         'title'    : request.POST['title'],
         'content'  : request.POST['content'],
         'date'     : date,

@@ -4,13 +4,68 @@
     <link rel="stylesheet" type="text/css" href="{% static 'quiz.css' %}">
 </head>
 <body>
-    <form action="{% url 'quiz:add' %}" method="post">
+    <form action="{% url 'quiz:submit_quiz' %}" method="post">
         <div class="cust_container">
         {% csrf_token %}
-            <h1>Add a quiz</h1>
-            <label for="question_text">Enter question text:</label>
-            <input type="text" placeholder="question text" name="question_text" id="question_text" required>            
-            <button type="submit" class="registerbtn">Add question</button>
+        <h1>Add a quiz</h1>
+        <label for="question_text">Enter question text:</label>
+        <input type="text" placeholder="question text" name="question_text" id="question_text" required>
+        <table>
+            <tr>
+                <th>Text</th>
+                <th>Correct</th> 
+            </tr>
+            <ul>
+                <tr>
+                <td>
+                <li>
+                    <label for="choice_text1">Enter first answer:</label>
+                    <input type="text" placeholder="answer text" name="choice_text1" id="choice_text1" required>
+                </li> 
+                </td>
+                <td>
+                    <input type="checkbox" id="correct1" name="correct1" value="True">
+                </td>
+                </tr>
+
+                <tr>
+                <td>
+                <li>
+                    <label for="choice_text2">Enter first answer:</label>
+                    <input type="text" placeholder="answer text" name="choice_text2" id="choice_text2" required>
+                </li> 
+                </td>
+                <td>
+                    <input type="checkbox" id="correct2" name="correct2" value="True">
+                </td>
+                </tr>
+
+                <tr>
+                <td>
+                <li>
+                    <label for="choice_text3">Enter first answer:</label>
+                    <input type="text" placeholder="answer text" name="choice_text3" id="choice_text3">
+                </li> 
+                </td>
+                <td>
+                    <input type="checkbox" id="correct3" name="correct3" value="True">
+                </td>
+                </tr>
+
+                <tr>
+                <td>
+                <li>
+                    <label for="choice_text4">Enter first answer:</label>
+                    <input type="text" placeholder="answer text" name="choice_text4" id="choice_text4">
+                </li> 
+                </td>
+                <td>
+                    <input type="checkbox" id="correct4" name="correct4" value="True">
+                </td>
+                </tr>         
+        </table></ul>
+        </br>
+        <button type="submit" class="registerbtn">Add question</button>
         </div>
     </form>
     </body>
