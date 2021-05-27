@@ -13,3 +13,8 @@ class Documents(models.Model):
     @property
     def relative_path(self):
         return os.path.relpath(self.location, settings.MEDIA_ROOT)
+
+
+class Rules(models.Model):
+    forum  = models.CharField(default='General', max_length=20)
+    rules = models.TextField()

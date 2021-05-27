@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.apps import apps
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import is_aware, make_aware
+from admin.models import Rules
 
 def get_aware_datetime(date_str):
     ret = parse_datetime(date_str)
@@ -17,7 +18,8 @@ User = apps.get_model('register', 'User')
 
 def index(request):
     context = {
-        'posts': Post.objects.all()
+        'posts': Post.objects.all(),
+        'user_type': request.session['user_type'],
     }
     return render(request, 'posts/index.html', context)
 
@@ -29,8 +31,9 @@ def viewpost(request, post_id):
     return render(request, 'posts/post.html', context)
 
 def deletepost(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    post.delete()
+    if request.session['user_type'] == 'Admin':
+        post = get_object_or_404(Post, id=post_id)
+        post.delete()
     return HttpResponseRedirect(reverse('posts:index'))
 
 def addpost(request):
@@ -85,32 +88,44 @@ def milgabyword(request):
 #### job searching functions ####
 
 def searchJobs(request):
+    if Rules.objects.filter(forum='Jobs').first() is None:
+        rules = None
+    else:
+        rules = Rules.objects.filter(forum='Jobs').first().rules
     if request.method == 'POST':
         word = request.POST['search']
         date = request.POST['date']
         context = {
             'posts' : Post.objects.all().filter(forum_id='Jobs' , title__contains=word, content__contains=word, date__contains=date ),
-            'date'     : timezone.now()
+            'date'  : timezone.now(),
+            'rules' : rules
         }
     else:
         context = {
             'posts' : Post.objects.all().filter(forum_id='Jobs'),
-            'date'     : timezone.now()
+            'date'  : timezone.now(),
+            'rules' : rules
         }
     return render(request, 'posts/jobs.html', context)
 
 def searchSocial(request):
+    if Rules.objects.filter(forum='Social').first() is None:
+        rules = None
+    else:
+        rules = Rules.objects.filter(forum='Social').first().rules
     if request.method == 'POST':
         word = request.POST['search']
         date = request.POST['date']
         context = {
             'posts' : Post.objects.all().filter(forum_id='Social' , title__contains=word, content__contains=word, date__contains=date ),
-            'date'     : timezone.now()
+            'date'     : timezone.now(),
+            'rules' : rules
         }
     else:
         context = {
             'posts' : Post.objects.all().filter(forum_id='Social'),
-            'date'     : timezone.now()
+            'date'     : timezone.now(),
+            'rules' : rules
         }
     return render(request, 'posts/social.html', context)
 

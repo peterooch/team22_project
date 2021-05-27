@@ -6,6 +6,9 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .forms import addAdminForm
 from register.models import User, Admin, Student, Faculty
+from django.contrib import messages
+from .models import Rules
+from django.urls import reverse
 
 def userlist(request):
     context = {
@@ -88,3 +91,31 @@ def student_to_faculty(request, user_id = None):
     faculty = Faculty(**kw)
     faculty.save()
     return render(request, 'admin/student_to_faculty.html', ctx)
+
+
+def addRules(request):
+    context = {
+        'forums' : {'milga', 'Jobs', 'Social', 'project', 'study', 'apartment', 'private teaching'}
+    }
+    return render(request, 'admin/rules.html', context)
+
+def submitRules(request):
+    # if there are no rules to the forum, add. otherwise overrun
+    
+    forum = request.POST['forum']
+    if Rules.objects.filter(forum=forum).first() is None:
+        details = {
+           'forum' :   forum,
+           'rules' :   request.POST['rules']
+        }
+        new_rules = Rules(**details)
+        new_rules.save()
+        messages.info(request,'Rules added!')
+    
+    else:
+        rules = Rules.objects.get(forum=forum)
+        rules.rules = request.POST['rules']
+        rules.save()
+        messages.info(request,'Rules updated!')
+
+    return HttpResponseRedirect(reverse('admin:addRules'))

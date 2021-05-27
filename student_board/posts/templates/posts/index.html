@@ -68,7 +68,9 @@
         {% endif %}
         Posted by: {{ post.poster }} <br/>
         Posting date: {{ post.date }} <br/>
+        {% if user_type == 'Admin' %}
         <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" >Delete post</a><br/>
+        {% endif %}
         </div>
     {% endfor %}
     </div>

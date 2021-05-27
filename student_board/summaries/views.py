@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse, HttpResponseRedirect
 from .models import Documents
+from django.urls import reverse
 from register.models import User
 from django.apps import apps
 from django.core.files.storage import FileSystemStorage
@@ -37,7 +38,13 @@ def submitSum(request):
 
 
 def viewSums(request):
+    if 'user_type' in request.session and request.session['user_type'] == "Admin":
+        admin = True
+    else:
+        admin = False
+
     context = {
+        'admin': admin,
         'users': User.objects.all(),
         'courses': Documents.objects.values_list('course', flat=True).distinct(),
         'docs': Documents.objects.all(),
@@ -59,3 +66,9 @@ def filterSums(request):
             'docs': Documents.objects.all().filter(course=c)
         }
     return render(request, 'summaries/viewSums.html', context)
+
+
+def deleteSum(request, title):
+    sum = get_object_or_404(Documents, title=title)
+    sum.delete()
+    return HttpResponseRedirect(reverse('summaries:viewSums'))

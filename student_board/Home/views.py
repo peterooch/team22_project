@@ -13,3 +13,7 @@ def Home(request):
         }
     return render(request, 'Home.html', context)
 
+def Logout(request):
+    request.session.flush()
+    return HttpResponseRedirect(reverse('Home:Home'))
+

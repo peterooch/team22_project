@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Add forum rules</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<style>
+    body {
+        font-family: verdana;
+    }
+    .p {
+        font-family: Arial, Helvetica, sans-serif;
+        color: red;
+    }
+</style>
+<body>
+    <h2>Add / Update Forum Rules</h2>
+    <form action="{% url 'admin:submitRules' %}" method='post'>
+        <p>
+        {% csrf_token %}
+        <label for="forum">Forum:
+        <select name="forum" id="forum">
+            {% for f in forums %}
+            <option value="{{f}}">{{f}}</option>
+            {% endfor %}
+        </select></br>
+        <label for="rules">Rules: <br/>
+        <textarea name="rules" cols="60" rows="15">
+        </textarea><br/>
+        <br>
+        <input type="submit" value="Add Rules" class=p/>
+        </p>
+    </form>
+
+    {% for message in messages %}
+        <p id="messages" class=p> {{message}} </p>
+    {% endfor %}
+
+    </br>
+    <a href="{% url 'posts:index' %}">Back to forums</a>
+</body>
+</html>
