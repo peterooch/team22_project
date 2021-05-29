@@ -234,3 +234,5 @@ def teaching_keyword(request):
         'posts' : Post.objects.all().filter(forum_id='private teaching').filter(content__contains=request.POST['kword'])
     }
     return render(request, 'posts/privateteaching.html', context)
+
+

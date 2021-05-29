@@ -13,4 +13,7 @@ urlpatterns = [
     path('view', views.viewSums, name='viewSums'),
     path('filterView', views.filterSums, name='filterSums'),
     path('delete/<str:title>/', views.deleteSum, name='deleteSum'),
+    path('feedback/<int:id>/', views.feedback, name='feedback'),
+    path('addfeedback', views.addfeedback, name='addfeedback'),
+    path('viewFeedback/<int:id>/', views.viewFeedback, name='viewFeedback')
 ] 

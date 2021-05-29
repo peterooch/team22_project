@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <style>
+            input {
+            background-color: #45a049;
+            }
+            textarea {
+            width: 100%; 
+            padding: 12px;  
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            margin-top: 6px;
+            margin-bottom: 16px; 
+            resize: vertical 
+            }
+        </style>
+    </head>
+    <div class="container">
+        <form action="{% url 'summaries:addfeedback' %}" method='post'>
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ id }}"> 
+            <textarea id="subject" name="feedback" placeholder="Write something.." style="height:200px"></textarea>
+
+            <input type="submit" value="Submit">
+            
+        </form>
+    </div>
+</html>

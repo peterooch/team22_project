@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse, HttpResponseRedirect
-from .models import Documents
+from .models import Documents, Feedback
 from django.urls import reverse
 from register.models import User
 from django.apps import apps
@@ -36,6 +36,29 @@ def submitSum(request):
     
     return HttpResponseRedirect('view')
 
+def viewFeedback(request, id):
+
+    context = {
+        'document'  : Documents.objects.get(id=id),
+        'feedbacks' : Feedback.objects.filter(DocumentID__id=id)
+    }
+    return render(request, 'summaries/viewfeedback.html', context)
+
+def addfeedback(request):
+
+    context = {
+        'feedback' :  request.POST['feedback'],
+        'DocumentID' : Documents.objects.get(id=request.POST['id'])
+    }
+    FB = Feedback(**context)
+    FB.save()
+    return HttpResponseRedirect(reverse('summaries:viewSums'))
+
+def feedback(request, id):
+    context = {
+        'id' : id
+    }
+    return render(request, 'summaries/feedBack.html', context)
 
 def viewSums(request):
     if 'user_type' in request.session and request.session['user_type'] == "Admin":

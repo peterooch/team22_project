@@ -18,3 +18,9 @@ class Documents(models.Model):
 class Rules(models.Model):
     forum  = models.CharField(default='General', max_length=20)
     rules = models.TextField()
+
+class Feedback(models.Model):
+    DocumentID = models.ForeignKey(Documents, on_delete=models.CASCADE)
+    feedback = models.TextField()
+
+
