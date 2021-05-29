@@ -1,8 +1,7 @@
 {% load static %}
 <html>
     <head>
-
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
     </head>
     <h1>Summaries </h1>
         <body>
@@ -27,8 +26,9 @@
                     <th scope="col">File</th> 
                     <th scope="col"> File size </th>
                     <th scope="col"> Feedback </th>
+                    <th scope="col"> Report File </th>
                     {% if admin %}
-                        <th scope="col"> add feedback </th>
+                        <th scope="col"> Add feedback </th>
                         <th scope="col"> Delete </th>
                     {% endif %}
                 </thead>
@@ -46,6 +46,7 @@
                     <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
                     <td> {{ doc.file_size }} bytes </td>
                     <td> <a href="{% url 'summaries:viewFeedback' doc.id %}">view feedback</a><br/></td>
+                    <td> <a href="{% url 'admin:newalert' doc.id %}">Report problems with file</a></td>
                     {% if admin %}
                         <td> <a href="{% url 'summaries:feedback' doc.id %}"> add feedback </a> <br/> </td>
                         <td> <a href="{% url 'summaries:deleteSum' doc.title %}" >Delete Summary</a><br/></td>
