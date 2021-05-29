@@ -26,7 +26,9 @@
                     <th scope="col">Uploader</th>
                     <th scope="col">File</th> 
                     <th scope="col"> File size </th>
+                    <th scope="col"> Feedback </th>
                     {% if admin %}
+                        <th scope="col"> add feedback </th>
                         <th scope="col"> Delete </th>
                     {% endif %}
                 </thead>
@@ -43,7 +45,9 @@
                     </td>
                     <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
                     <td> {{ doc.file_size }} bytes </td>
+                    <td> <a href="{% url 'summaries:viewFeedback' doc.id %}">view feedback</a><br/></td>
                     {% if admin %}
+                        <td> <a href="{% url 'summaries:feedback' doc.id %}"> add feedback </a> <br/> </td>
                         <td> <a href="{% url 'summaries:deleteSum' doc.title %}" >Delete Summary</a><br/></td>
                     {% endif %}
                 </tr>
