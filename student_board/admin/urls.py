@@ -13,4 +13,9 @@ urlpatterns = [
     path('convert', views.student_to_faculty),
     path('rules', views.addRules, name='addRules'),
     path('submitRules', views.submitRules, name='submitRules'),
+    path('alerts', views.alerts, name='alerts'),
+    path('deletealert/<alert_id>/', views.deletealert, name='deletealert'),
+    path('handlealert/<alert_id>/', views.handlealert, name='handlealert'),
+    path('newalert/<doc_id>/', views.newalert, name='newalert'),
+    path('createalert', views.createalert, name='createalert'),
 ]

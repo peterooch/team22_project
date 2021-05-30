@@ -4,10 +4,12 @@ from django.shortcuts import render
 from django.apps import apps
 from django.contrib import messages
 from django.http import HttpResponse
+
+from summaries.models import Documents
 from .forms import addAdminForm
 from register.models import User, Admin, Student, Faculty
 from django.contrib import messages
-from .models import Rules
+from .models import Rules, AdminAlert
 from django.urls import reverse
 
 def userlist(request):
@@ -119,3 +121,36 @@ def submitRules(request):
         messages.info(request,'Rules updated!')
 
     return HttpResponseRedirect(reverse('admin:addRules'))
+
+def alerts(request):
+    context = {
+        'alerts': AdminAlert.objects.all(),
+    }
+    return render(request, 'admin/alerts.html', context)
+
+def deletealert(request, alert_id):
+    alert = AdminAlert.objects.get(id=alert_id)
+    alert.delete()
+    return HttpResponseRedirect(reverse('admin:alerts'))
+
+def handlealert(request, alert_id):
+    alert = AdminAlert.objects.get(id=alert_id)
+    try:
+        alert.document.delete()
+        alert.delete()
+    except:
+        pass
+    return HttpResponseRedirect(reverse('admin:alerts'))
+
+def newalert(request, doc_id):
+    return render(request, 'admin/newalert.html', { 'doc_id': doc_id })
+
+def createalert(request):
+    kw = {
+        'reporter' : User.objects.get(id=request.session['user']),
+        'document' : Documents.objects.get(id=request.POST['doc_id']),
+        'info'     : request.POST['info'],
+    }
+    alert = AdminAlert(**kw)
+    alert.save()
+    return HttpResponseRedirect(reverse('summaries:viewSums'))
