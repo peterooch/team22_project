@@ -1,0 +1,18 @@
+{% load static %}
+<html>
+<head>
+    <title>New Report</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+</head>
+<body>
+    <form action="{% url 'admin:createalert' %}" method="post">
+    {% csrf_token %}
+    <h4>File your report here:</h4>
+    <input type="hidden" name="doc_id" value="{{ doc_id }}" />
+    <textarea name="info" placeholder="Write your reason for reporting here">
+    </textarea><br/>
+    <input type="submit" value="File report"/><br/>
+    Your report will be read by an admin.
+    </form>
+</body>
+</html>

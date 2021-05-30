@@ -1,0 +1,34 @@
+{% load static %}
+<html>
+<head>
+    <title>Alerts</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+</head>
+<body>
+    <h1>Admin alerts</h1>
+    <table class="table">
+        <thead>
+            <th scope="col">File</th>
+            <th scope="col">Reporter</th> 
+            <th scope="col">Additional Info</th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
+        </thead>
+        <tbody>
+        {% for alert in alerts %}
+        <tr>
+            <td>
+            File Name: {{ alert.document.title }}<br/>
+            Course: {{ alert.document.course }}<br/>
+            File location: {{ alert.document.relative_path }}
+            </td>
+            <td>{{ alert.reporter.first_name }} {{ alert.reporter.last_name }}</td>
+            <td>{{ alert.info }}</td>
+            <td><a href="{% url 'admin:handlealert' alert.id %}">Delete file</a></td>
+            <td><a href="{% url 'admin:deletealert' alert.id %}">Delete alert</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
