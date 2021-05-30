@@ -1,7 +1,11 @@
 <html>
     <h2> Add Admin </h2>
     <br>
+    {% if first_run %}
+    <div>Please enter the first admin user information:</div>
+    {% else %}
     <div> Please enter the new admin's information:</div>
+    {% endif %}
     <br>
     
     <form action="" method="post">

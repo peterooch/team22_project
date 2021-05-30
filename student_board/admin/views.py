@@ -36,8 +36,8 @@ def addAdmin(request):
             return HttpResponse('added new admin') #FIX TO REDIRECT
         else:
             messages.info(request,'form not valid')
-
-    context={'form': form}
+    first_run = Admin.objects.all().exists() is False  
+    context={'form': form, 'first_run': first_run}
     return render(request, 'admin/addAdmin.html', context)
 
 def approvals(request):
