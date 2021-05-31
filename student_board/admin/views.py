@@ -31,9 +31,13 @@ def addAdmin(request):
                 'id'  : request.POST['id']
             }
             new_admin=Admin(**args)
-            #add try and except for entering the same id
-            new_admin.save()
-            return HttpResponse('added new admin') #FIX TO REDIRECT
+            try:
+                new_admin.save()
+            except:
+                messages.info(request,'Email already in use')
+                context={}
+                return render(request, 'admin/addAdmin.html', context)
+            return HttpResponseRedirect('/')
         else:
             messages.info(request,'form not valid')
     first_run = Admin.objects.all().exists() is False  

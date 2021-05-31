@@ -13,6 +13,13 @@
 {% if logged %}
   <a href="{% url 'posts:index' %}">Posts</a>
   <a href="{% url 'summaries:viewSums' %}">Summaries</a>
+  {% if user == "Admin" %}
+    <a href="{% url 'admin:addAdmin' %}">Add Admin</a>
+    <a href="{% url 'admin:userlist' %}">View Users</a>
+    <a href="{% url 'admin:addRules' %}">Add forum rules</a>
+    <a href="{% url 'admin:alerts' %}">Alerts</a>
+    <a href="{% url 'admin:approvals' %}">Approvals</a>
+  {% endif %}
   <a href="{% url 'Home:Logout' %}" >Logout</a>
 {% endif %}
 </div>

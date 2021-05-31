@@ -9,11 +9,13 @@ def Home(request):
         return HttpResponseRedirect(reverse('admin:addAdmin'))
 
     logged = False
+    user_type = None
     if 'user_type' in request.session:
         user_type = request.session['user_type']
         logged = True
     context = { 
-        'logged' : logged,
+        'logged'    : logged,
+        'user'      : user_type,
         }
     return render(request, 'Home.html', context)
 
