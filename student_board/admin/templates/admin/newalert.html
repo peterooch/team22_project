@@ -9,9 +9,9 @@
     {% csrf_token %}
     <h4>File your report here:</h4>
     <input type="hidden" name="doc_id" value="{{ doc_id }}" />
-    <textarea name="info" placeholder="Write your reason for reporting here">
+    <textarea class="form-control" name="info" placeholder="Write your reason for reporting here">
     </textarea><br/>
-    <input type="submit" value="File report"/><br/>
+    <input class="btn btn-primary" type="submit" value="File report"/><br/>
     Your report will be read by an admin.
     </form>
 </body>

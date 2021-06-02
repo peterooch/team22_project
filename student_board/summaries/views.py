@@ -27,7 +27,7 @@ def submitSum(request):
     details = {
         'location'  : settings.MEDIA_ROOT,
         'title'     : newfile.name,
-        'user'      : request.POST['id'],
+        'user'      : request.session['user'],
         'course'    : request.POST['course'],
         'file_size' : file_size,
     }
@@ -61,13 +61,14 @@ def feedback(request, id):
     return render(request, 'summaries/feedBack.html', context)
 
 def viewSums(request):
-    if 'user_type' in request.session and request.session['user_type'] == "Admin":
-        admin = True
+    
+    if 'user_type' in request.session:
+        user_type = request.session['user_type']
     else:
-        admin = False
+        user_type = None
 
     context = {
-        'admin': admin,
+        'user_type': user_type,
         'users': User.objects.all(),
         'courses': Documents.objects.values_list('course', flat=True).distinct(),
         'docs': Documents.objects.all(),

@@ -1,79 +1,59 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <title>Posts</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
     <style>
-        .button {
-            background-color: #555555;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        table, td, th {
-        border: 1px solid black;
-        }
-        table {
-        width: 100%;
-        border-collapse: collapse;
-        }
+    body {
+        padding-left: 1%;
+    }
+    .form-control {
+        width: 30%;
+    }
     </style>
 </head>
 <body>
-    <table style="width:50%">
-    <tr>
-        <th>    
-            <a href="{% url 'posts:searchmilga' %}">Scholarship posts</a>
-        </th>
-        <th>
-            <a href="{% url 'posts:searchproject' %}">Project parnter posts</a>
-        </th>
-        <th>
-            <a href="{% url 'posts:studybuddy' %}">Study together posts</a>
-        </th>
-        <th>
-            <a href="{% url 'posts:searchapartment' %}">Apartment forum</a>
-        </th>
-        <th>
-            <a href="{% url 'posts:zoomlink' %}"> Zoom meeting </a>
-        </th>
-        <th>    
-            <a href="{% url 'posts:searchateacher' %}">Private teaching forum</a>
-        </th>
-        <th>    
-            <a href="{% url 'posts:searchJobs' %}">Jobs forum</a>
-        </th>
-        <th>    
-            <a href="{% url 'posts:searchSocial' %}">Social forum</a>
-        </th>
-    </tr>
-    </table>
     <br/>
+    <p style="width:75%">   
+        <a class="btn btn-primary" href="{% url 'posts:addpost' %}">Add new post</a>
+        <a class="btn btn-primary" href="{% url 'posts:zoomlink' %}">Add new Zoom link</a>
+        <a class="btn btn-secondary" href="{% url 'posts:searchmilga' %}">Scholarship posts</a>
+        <a class="btn btn-secondary" href="{% url 'posts:searchproject' %}">Project partner posts</a>
+        <a class="btn btn-secondary" href="{% url 'posts:studybuddy' %}">Study together posts</a>
+        <a class="btn btn-secondary" href="{% url 'posts:searchapartment' %}">Apartment forum</a>
+        <a class="btn btn-secondary" href="{% url 'posts:zoomlink' %}"> Zoom meeting </a>   
+        <a class="btn btn-secondary" href="{% url 'posts:searchateacher' %}">Private teaching forum</a>    
+        <a class="btn btn-secondary" href="{% url 'posts:searchJobs' %}">Jobs forum</a> 
+        <a class="btn btn-secondary" href="{% url 'posts:searchSocial' %}">Social forum</a>
+    </p>
     <div style="display: flex; flex-wrap: wrap;">
     {% for post in posts %}
-        <div>
-        Title: <a href="{% url 'posts:viewpost' post.id %}">{{ post.title }}</a> <br/>
+        <div class="card">
+        <div class="card-body">
+        <div class="card-title"> 
+        <h5>{{ post.title }}</h5>
+        </div> <br/>
+        <div class="card-subtitle text-muted">
+        Forum: {{ post.forum_id }} |
+        Posted by: {{ post.poster }} |
+        Posting date: {{ post.date }} <br/>
+        </div>
         {% if 'zoom' in post.forum_id %}
         <a href="{{ post.content }}">{{ post.content }}</a><br/>
         {% else %}
         Content: <br/>
         {{ post.content }} <br/>
         {% endif %}
-        Posted by: {{ post.poster }} <br/>
-        Posting date: {{ post.date }} <br/>
         {% if user_type == 'Admin' %}
-        <a href="{% url 'posts:deletepost' post.id %}" class="delete_button" >Delete post</a><br/>
+        <br/>
+        <a class="btn btn-danger" href="{% url 'posts:deletepost' post.id %}" class="delete_button" >Delete post</a><br/>
         {% endif %}
+        </div>
         </div>
     {% endfor %}
     </div>
-    <a href="{% url 'posts:addpost' %}">Add new post</a>
 </body>
 </html>

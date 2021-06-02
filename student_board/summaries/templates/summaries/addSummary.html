@@ -1,26 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Summary </title>
+    <title>Add Summary</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
 </head>
 <body>
     <h2>Add a new summary</h2>
     <form action="{% url 'summaries:submitSum' %}" method='post' enctype="multipart/form-data">
         {% csrf_token %}
-        {% if faculty %}
-        <label for="id">Enter faculty ID: </label>
-        {% else %}
-        <label for="id">Enter student ID: </label>
-        {% endif %}
-        <input id="id" type="text" name="id">
-        <br><br>
+        <br>
         <label for="course">Enter course: </label>
         <input id="course" type="course" name="course">
         <br><br>
         <label for="file">Select a file:</label> 
         <input id="file" type="file" name="file"> 
         <br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-primary">
     </form>
 </body>
 </html>

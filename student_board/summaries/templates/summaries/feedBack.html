@@ -14,8 +14,16 @@
             margin-bottom: 16px; 
             resize: vertical 
             }
+            body {
+                padding-left: 1%;
+            }
+            .form-control {
+                width: 30%;
+            }
         </style>
+        <title>New feedback</title>
     </head>
+    <body>
     <div class="container">
         <form action="{% url 'summaries:addfeedback' %}" method='post'>
             {% csrf_token %}
@@ -26,4 +34,5 @@
             
         </form>
     </div>
+    </body>
 </html>

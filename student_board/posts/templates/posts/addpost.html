@@ -1,24 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <title>Add post</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <style>
+    body {
+        padding-left: 1%;
+    }
+    </style>
 </head>
 <body>
     <h5>New Post:</h5>
     <form action="{% url 'posts:submitpost' %}" method='post'>
-    <p>
+    <p style="width: 50%">
     {% csrf_token %}
     <label for="title">Post Title: </label>
-    <input type="text" name="title" /><br/>
+    <input type="text" name="title" class="form-control"/><br/>
     <label for="forum_id">Forum: </label>
-    <input type="text" name="forum_id" /><br/>
+    <select type="text" name="forum_id" class="form-select"/>
+    {% for forum in forum_ids %}
+    <option value="{{ forum }}">{{ forum }}</option>
+    {% endfor %}
+    </select><br/>
     <label for="content">Post content: <br/>
-    <textarea name="content" cols="80" rows="20">
-Post content goes here.
-    </textarea><br/>
-    <input type="submit" value="Add Post"/>
+    <textarea name="content" cols="80" rows="20" placeholder="Post content goes here."></textarea><br/>
+    <input type="submit" value="Add Post" class="btn btn-primary"/>
     </p>
     </form>
 </body>

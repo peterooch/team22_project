@@ -16,6 +16,9 @@ def get_aware_datetime(date_str):
 Post = apps.get_model('posts', 'Post')
 User = apps.get_model('register', 'User')
 
+forum_ids = ['General', 'milga', 'Jobs', 'Social', 'project', 'study', 'apartment', 'private teaching']
+forum_ids.sort()
+
 def index(request):
     context = {
         'posts': Post.objects.all(),
@@ -37,11 +40,11 @@ def deletepost(request, post_id):
     return HttpResponseRedirect(reverse('posts:index'))
 
 def addpost(request):
-    return render(request, 'posts/addpost.html', {})
+    return render(request, 'posts/addpost.html', {'forum_ids': forum_ids})
 
 def sumbitpost(request):
     user = get_object_or_404(User, id=request.session['user'])
-    forum = 'Genral'
+    forum = 'General'
     if (request.POST['forum_id'] != ''):
         forum = request.POST['forum_id']
     if 'zoomdate' in request.POST:
@@ -60,9 +63,8 @@ def sumbitpost(request):
     }
     post = Post(**kw)
     post.save()
-    if forum == 'zoom':
-        return HttpResponseRedirect(reverse('posts:index'))
-    return HttpResponseRedirect(reverse('posts:viewpost', args=(post.id,)))
+
+    return HttpResponseRedirect(reverse('posts:index'))
 
 ##### scholarship functions ####
 

@@ -1,17 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
 <html>
-    <head>
-
-    </head>
+<head>
+    <meta charset='utf-8'>
+    <title>New Zoom link</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <style>
+    body {
+        padding-left: 1%;
+    }
+    .form-control {
+        width: 30%;
+    }
+    </style>
+</head>
     <body>
         <form action="{% url 'posts:submitpost' %}" method='post'>
             {% csrf_token %}
             <label for="title">Post Title: </label>
-            <input type="text" name="title" /><br><br>
-            <label for="url" >Url zoom: </label>
-            <input type="text" name="content"> <br><br>
+            <input class="form-control" type="text" name="title" /><br><br>
+            <label for="url" >Zoom url: </label>
+            <input class="form-control" type="text" name="content"> <br><br>
             <label for="date" >Date: </label>
-            <input type="datetime-local" name="zoomdate"> <br><br>
-            <input type="submit">
+            <input class="form-control" type="datetime-local" name="zoomdate"> <br><br>
+            <input class="btn btn-primary" type="submit">
             <input type="hidden" name="forum_id" value="zoom">
         </form>
     </body>

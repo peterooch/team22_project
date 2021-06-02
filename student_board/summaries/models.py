@@ -9,6 +9,7 @@ class Documents(models.Model):
     title = models.TextField()
     course = models.TextField()
     file_size = models.TextField()
+    additional = models.BooleanField(default=False)
 
     @property
     def relative_path(self):

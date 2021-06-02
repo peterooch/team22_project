@@ -10,7 +10,7 @@ urlpatterns = [
     path('approve/<user_id>/', views.approve, name='approve'),
     path('deleteuser/<user_id>/', views.deleteuser, name='deleteuser'),
     path('convert/<user_id>/', views.student_to_faculty, name='convert'),
-    path('convert', views.student_to_faculty),
+    path('convert', views.student_to_faculty, name='convertindex'),
     path('rules', views.addRules, name='addRules'),
     path('submitRules', views.submitRules, name='submitRules'),
     path('alerts', views.alerts, name='alerts'),

@@ -2,25 +2,41 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{% static 'Home.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+  <style>
+  #buttons {
+    margin: auto;
+    width: 50%;
+    padding: 1%;
+  }
+  .btn {
+    width: 100%;
+  }
+  </style>
 </head>
 <body>
-
-<div class="topnav">
-  <a class="home" href="#home">Home</a>
-  <a href="{% url 'register:index' %}">Register</a>
-  <a href="{% url 'login:login' %}">Login</a>
+<div id="buttons">
 {% if logged %}
-  <a href="{% url 'posts:index' %}">Posts</a>
-  <a href="{% url 'summaries:viewSums' %}">Summaries</a>
+  Welcome {{ user_friendly }} <br/><br/>
+{% endif %}
+  <a class="btn btn-primary" class="home" href="#home">Home</a><br/><br/>
+{% if not logged %}
+  <a class="btn btn-primary" href="{% url 'register:index' %}">Register</a><br/><br/>
+  <a class="btn btn-primary" href="{% url 'login:login' %}">Login</a><br/><br/>
+{% endif %}
+{% if logged %}
+  <a class="btn btn-primary" href="{% url 'posts:index' %}">Posts</a><br/><br/>
+  <a class="btn btn-primary" href="{% url 'summaries:viewSums' %}">Summaries</a><br/><br/>
+  <a class="btn btn-danger" href="{% url 'Home:Logout' %}" >Logout</a><br/><br/>
   {% if user == "Admin" %}
-    <a href="{% url 'admin:addAdmin' %}">Add Admin</a>
-    <a href="{% url 'admin:userlist' %}">View Users</a>
-    <a href="{% url 'admin:addRules' %}">Add forum rules</a>
-    <a href="{% url 'admin:alerts' %}">Alerts</a>
-    <a href="{% url 'admin:approvals' %}">Approvals</a>
+    Admin Actions:<br/>
+    <a class="btn btn-primary" href="{% url 'admin:addAdmin' %}">Add New Admin</a><br/><br/>
+    <a class="btn btn-primary" href="{% url 'admin:userlist' %}">View Users</a><br/><br/>
+    <a class="btn btn-primary" href="{% url 'admin:addRules' %}">Add forum rules</a><br/><br/>
+    <a class="btn btn-primary" href="{% url 'admin:alerts' %}">Alerts</a><br/><br/>
+    <a class="btn btn-primary" href="{% url 'admin:approvals' %}">Approve Users</a><br/><br/>
+    <a class="btn btn-primary" href="{% url 'admin:convertindex' %}">Manage Permissions</a><br/><br/>
   {% endif %}
-  <a href="{% url 'Home:Logout' %}" >Logout</a>
 {% endif %}
 </div>
 </body>
