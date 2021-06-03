@@ -19,6 +19,7 @@ def adduser(request):
     student = Student(**kw)
     student.save()
     request.session['user'] = student.id
+    request.session['user_type'] = 'Student'
     return HttpResponseRedirect('/')
 
 def facultyReg(request):
@@ -35,4 +36,6 @@ def facultyRegister(request):
     }
     faculty = Faculty(**details)
     faculty.save()
+    request.session['user'] = faculty.id
+    request.seesion['user_type'] = 'Faculty'
     return HttpResponseRedirect('/')

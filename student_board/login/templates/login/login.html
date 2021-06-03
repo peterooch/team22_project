@@ -1,18 +1,28 @@
+{% load static %}
 <html>
+    <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+        <style>
+        body {
+            padding-left: 1%;
+        }
+        .form-control {
+            width: 30%;
+        }
+        </style>
     <body>
         <form action="" method="post">
             <div class="cust_container">
             {% csrf_token %}
                 <h1>Login</h1>
                 <label for="email">Email</label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required>
-                <br><br>
-                
+                <input class="form-control" type="text" placeholder="Enter Email" name="email" id="email" required>
+                <br>
                 <label for="password">Password</label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                <br><br>
-
-                <input type="submit" value="login">
+                <input class="form-control" type="password" placeholder="Enter Password" name="password" id="password" required>
+                <br>
+                <input class="btn btn-primary" type="submit" value="Login">
 
                 {% for message in messages %}
                     <p id="messages"> {{message}} </p>

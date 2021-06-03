@@ -15,4 +15,4 @@ cd student_board
 python manage.py migrate    
 python manage.py runserver
 ```
-This will open a server that can be accessed in the links: https://localhost:8000 .
+This will open a server that can be accessed in the links: http://localhost:8000 .

@@ -21,7 +21,8 @@
 {% endif %}
   <a class="btn btn-primary" class="home" href="#home">Home</a><br/><br/>
 {% if not logged %}
-  <a class="btn btn-primary" href="{% url 'register:index' %}">Register</a><br/><br/>
+  <a class="btn btn-primary" href="{% url 'register:index' %}">Student Registration</a><br/><br/>
+  <a class="btn btn-primary" href="{% url 'register:facultyReg' %}">Faculty Registration</a><br/><br/>
   <a class="btn btn-primary" href="{% url 'login:login' %}">Login</a><br/><br/>
 {% endif %}
 {% if logged %}

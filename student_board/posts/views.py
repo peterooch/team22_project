@@ -20,8 +20,15 @@ forum_ids = ['General', 'milga', 'Jobs', 'Social', 'project', 'study', 'apartmen
 forum_ids.sort()
 
 def index(request):
+    posts = list(Post.objects.all())
+    for post in posts:
+        try:
+            post.poster_user = User.objects.get(id=post.poster)
+        except:
+            post.poster_user = post.poster
+    
     context = {
-        'posts': Post.objects.all(),
+        'posts': posts,
         'user_type': request.session['user_type'],
     }
     return render(request, 'posts/index.html', context)

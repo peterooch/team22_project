@@ -24,7 +24,7 @@
         <a class="btn btn-secondary" href="{% url 'posts:searchproject' %}">Project partner posts</a>
         <a class="btn btn-secondary" href="{% url 'posts:studybuddy' %}">Study together posts</a>
         <a class="btn btn-secondary" href="{% url 'posts:searchapartment' %}">Apartment forum</a>
-        <a class="btn btn-secondary" href="{% url 'posts:zoomlink' %}"> Zoom meeting </a>   
+        <!--<a class="btn btn-secondary" href="{% url 'posts:zoomlink' %}"> Zoom meeting </a>-->   
         <a class="btn btn-secondary" href="{% url 'posts:searchateacher' %}">Private teaching forum</a>    
         <a class="btn btn-secondary" href="{% url 'posts:searchJobs' %}">Jobs forum</a> 
         <a class="btn btn-secondary" href="{% url 'posts:searchSocial' %}">Social forum</a>
@@ -38,7 +38,7 @@
         </div> <br/>
         <div class="card-subtitle text-muted">
         Forum: {{ post.forum_id }} |
-        Posted by: {{ post.poster }} |
+        Posted by: {{ post.poster_user }} |
         Posting date: {{ post.date }} <br/>
         </div>
         {% if 'zoom' in post.forum_id %}
