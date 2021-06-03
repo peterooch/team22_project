@@ -2,9 +2,12 @@ from django.test import TestCase
 from quiz.models import Question,Choice
 from register.models import User
 from django.utils import timezone
+from django.test.client import RequestFactory
+from quiz import views
 
 class quiz_test(TestCase):
     def setUp(self):
+        self.rf = RequestFactory()
         User.objects.create(
             id='123',
             first_name='dummy',
