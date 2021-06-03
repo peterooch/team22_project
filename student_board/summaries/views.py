@@ -6,15 +6,14 @@ from register.models import User
 from django.apps import apps
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+from collections import namedtuple
 
-
-def addSum(request):
-    context = { 'faculty': False}
+def addSum(request, additional = False):
+    context = { 'additional': additional}
     return render(request, 'summaries/addSummary.html', context)
 
-def addSumFaculty(request):
-    context = { 'faculty': True}
-    return render(request, 'summaries/addSummary.html', context)
+def addMat(request):
+    return addSum(request, additional=True)
 
 def submitSum(request):
 
@@ -30,6 +29,7 @@ def submitSum(request):
         'user'      : request.session['user'],
         'course'    : request.POST['course'],
         'file_size' : file_size,
+        'additional': (request.POST['additional'] == 'True')
     }
     doc = Documents(**details)
     doc.save()
@@ -60,6 +60,9 @@ def feedback(request, id):
     }
     return render(request, 'summaries/feedBack.html', context)
 
+Pair = namedtuple('Pair', ['bool_val', 'title'])
+doc_pairs = [Pair(False, 'Summaries'), Pair(True, 'Additional Materials')]
+
 def viewSums(request):
     
     if 'user_type' in request.session:
@@ -72,6 +75,7 @@ def viewSums(request):
         'users': User.objects.all(),
         'courses': Documents.objects.values_list('course', flat=True).distinct(),
         'docs': Documents.objects.all(),
+        'pairs': doc_pairs,
     }
     return render(request, 'summaries/viewSums.html', context)
 
@@ -81,13 +85,15 @@ def filterSums(request):
         context = {
             'users': User.objects.all(),
             'courses': Documents.objects.values_list('course', flat=True).distinct(),
-            'docs': Documents.objects.all()
+            'docs': Documents.objects.all(),
+            'pairs': doc_pairs,
         }
     else:
         context = {
             'users': User.objects.all(),
             'courses': Documents.objects.values_list('course', flat=True).distinct(),
-            'docs': Documents.objects.all().filter(course=c)
+            'docs': Documents.objects.all().filter(course=c),
+            'pairs': doc_pairs,
         }
     return render(request, 'summaries/viewSums.html', context)
 
