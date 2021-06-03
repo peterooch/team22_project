@@ -5,60 +5,63 @@
         <title>Summaries</title>
     </head>
     <body>
-    <h1>Summaries</h1>
-            <br>
-            <a href="{% url 'summaries:addSum' %}" class="btn btn-primary">Add new summary</a>&nbsp;
-            {% if user_type == 'Faculty' %}
-            <a href="{% url 'summaries:addMat' %}" class="btn btn-primary">Add additional material</a>
-            {% endif %}
-            <p>
-            <form action="{% url 'summaries:filterSums' %}" method='post' enctype="multipart/form-data">
-                {% csrf_token %}
-                <label for="course">Choose a course:</label>
-                <select name="course" id="course" class="form-select" style="width:20%;">
-                    <option value="all"> all</option>
-                    {% for c in courses %}
-                    <option value="{{c}}">{{c}}</option>
-                    {% endfor %}
-                </select>
-                <br>
-                <input type="submit" value="Filter" class="btn btn-primary">
-              </form>
-            </p>
-            <table class="table">
-                <thead>
-                    <th scope="col">Course</th>
-                    <th scope="col">Uploader</th>
-                    <th scope="col">File</th> 
-                    <th scope="col"> File size </th>
-                    <th scope="col"> Feedback </th>
-                    <th scope="col"> Report File </th>
-                    {% if admin %}
-                        <th scope="col"> Add feedback </th>
-                        <th scope="col"> Delete </th>
-                    {% endif %}
-                </thead>
-                {% for doc in docs %}
-                <tr>
-                    <td>{{ doc.course }}</td>
-                    <td>
-                        {% for u in users %}
-                            {% if u.id == doc.user %}
-                                {{u.first_name}} {{u.last_name}}
-                            {% endif %}
-    
-                        {% endfor %}
-                    </td>
-                    <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
-                    <td> {{ doc.file_size }} bytes </td>
-                    <td> <a href="{% url 'summaries:viewFeedback' doc.id %}">view feedback</a><br/></td>
-                    <td> <a href="{% url 'admin:newalert' doc.id %}">Report problems with file</a></td>
-                    {% if user_type == 'Admin' %}
-                        <td> <a href="{% url 'summaries:feedback' doc.id %}"> add feedback </a> <br/> </td>
-                        <td> <a href="{% url 'summaries:deleteSum' doc.title %}" >Delete Summary</a><br/></td>
-                    {% endif %}
-                </tr>
+        <br>
+        <a href="{% url 'summaries:addSum' %}" class="btn btn-primary">Add new summary</a>&nbsp;
+        {% if user_type == 'Faculty' %}
+        <a href="{% url 'summaries:addMat' %}" class="btn btn-primary">Add additional material</a>
+        {% endif %}
+        <p>
+        <form action="{% url 'summaries:filterSums' %}" method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="course">Choose a course:</label>
+            <select name="course" id="course" class="form-select" style="width:20%;">
+                <option value="all"> all</option>
+                {% for c in courses %}
+                <option value="{{c}}">{{c}}</option>
                 {% endfor %}
-            </table>
-        </body>
+            </select>
+            <br>
+            <input type="submit" value="Filter" class="btn btn-primary">
+            </form>
+        </p>
+        {% for pair in pairs %}
+        <h1>{{ pair.title }}</h1>
+        <table class="table">
+            <thead>
+                <th scope="col">Course</th>
+                <th scope="col">Uploader</th>
+                <th scope="col">File</th> 
+                <th scope="col">File size</th>
+                <th scope="col">Feedback</th>
+                <th scope="col">Report File</th>
+                {% if user_type == 'Admin' %}
+                    <th scope="col">Add feedback</th>
+                    <th scope="col">Delete</th>
+                {% endif %}
+            </thead>
+            {% for doc in docs %}
+            {% if doc.additional == pair.bool_val %}
+            <tr>
+                <td>{{ doc.course }}</td>
+                <td>
+                    {% for u in users %}
+                        {% if u.id == doc.user %}
+                            {{u.first_name}} {{u.last_name}}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td> <a href="{{ MEDIA_URL }}{{ doc.title }}" download={{doc.title}}> {{doc.title}} </a></td>   
+                <td> {{ doc.file_size }} bytes </td>
+                <td> <a href="{% url 'summaries:viewFeedback' doc.id %}">View feedback</a><br/></td>
+                <td> <a href="{% url 'admin:newalert' doc.id %}">Report problems with file</a></td>
+                {% if user_type == 'Admin' %}
+                    <td> <a href="{% url 'summaries:feedback' doc.id %}">Add feedback</a> <br/> </td>
+                    <td> <a href="{% url 'summaries:deleteSum' doc.title %}" >Delete Summary</a><br/></td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+        {% endfor %}
+    </body>
 </html>

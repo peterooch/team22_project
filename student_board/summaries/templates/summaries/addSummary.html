@@ -2,16 +2,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Summary</title>
+    <title>
+    Add
+    {% if additional %}
+    additional materials
+    {% else %}
+    Summary
+    {% endif %}
+    </title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <style>
+    .form-control {
+        width: 30%;
+    }
+    body {
+        padding-left: 1%;
+    }
+    </style>
 </head>
 <body>
-    <h2>Add a new summary</h2>
+    <h2>Add a new 
+    {% if additional %}
+    additional materials
+    {% else %}
+    Summary
+    {% endif %}
+    file.
+    </h2>
     <form action="{% url 'summaries:submitSum' %}" method='post' enctype="multipart/form-data">
         {% csrf_token %}
         <br>
+        <input type="hidden" name="additional" value="{{ additional }}" />
         <label for="course">Enter course: </label>
-        <input id="course" type="course" name="course">
+        <input class="form-control" id="course" type="course" name="course">
         <br><br>
         <label for="file">Select a file:</label> 
         <input id="file" type="file" name="file"> 
