@@ -12,6 +12,7 @@ Then in commandline type the following:
 (substitute python for python3 on linux/mac os)
 ```
 cd student_board
+pip install -r requirements.txt
 python manage.py migrate    
 python manage.py runserver
 ```
