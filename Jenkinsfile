@@ -10,7 +10,8 @@ pipeline {
                     cd student_board
                     rm django.sqlite3
                     python3 manage.py migrate --settings=student_board.test_settings
-                    python3 manage.py test --settings=student_board.test_settings
+                    coverage run --source='.' manage.py test --settings=student_board.test_settings
+                    coverage report
                 '''
             }
         }
