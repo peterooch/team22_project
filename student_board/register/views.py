@@ -37,5 +37,5 @@ def facultyRegister(request):
     faculty = Faculty(**details)
     faculty.save()
     request.session['user'] = faculty.id
-    request.seesion['user_type'] = 'Faculty'
+    request.session['user_type'] = 'Faculty'
     return HttpResponseRedirect('/')
