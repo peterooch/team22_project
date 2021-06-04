@@ -1,4 +1,4 @@
-from django.db.models import Model
+from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
@@ -58,7 +58,7 @@ def approve(request, user_id):
             user.approved = True
             user.save()
             break
-        except Model.DoesNotExist:
+        except ObjectDoesNotExist:
             pass
     return HttpResponseRedirect('/admin/approvals')
 
@@ -68,7 +68,7 @@ def deleteuser(requset, user_id):
             user = type.objects.get(id=user_id)
             user.delete()
             break
-        except Model.DoesNotExist:
+        except ObjectDoesNotExist:
             pass
     return HttpResponseRedirect('/admin/userlist')
 
@@ -81,7 +81,7 @@ def student_to_faculty(request, user_id = None):
     student = None
     try:
         student = Student.objects.get(id=user_id)
-    except Model.DoesNotExist:
+    except ObjectDoesNotExist:
         return render(request, 'admin/student_to_faculty.html', ctx)
 
     kw = {
